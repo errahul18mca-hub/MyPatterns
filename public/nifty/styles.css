@@ -1,0 +1,268 @@
+:root {
+    --bg: #0f1419;
+    --card: #111820;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --bull: #1db954;
+    --bear: #ff4d4f;
+    --neutral: #7f8c8d;
+    --accent: #3b82f6;
+    --ok: #16a34a;
+    --warn: #f59e0b;
+    --err: #ef4444;
+    --chip-bg: #1b2430;
+    --chip-br: #273142;
+    --kpi-bg: #0b1116;
+    --gap-1: 6px;
+    --gap-2: 12px;
+    --gap-3: 16px;
+    --rad: 10px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial
+}
+
+h1,
+h3 {
+    margin: 0 0 var(--gap-2)
+}
+
+h1 {
+    font-size: 20px
+}
+
+h3 {
+    font-size: 14px;
+    color: #c9d1d9
+}
+
+/* Header KPIs */
+#header-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--gap-2);
+    margin-bottom: 20px
+}
+
+.kpi {
+    background: var(--kpi-bg);
+    border: 1px solid #1f2a36;
+    border-radius: var(--rad);
+    padding: 10px 12px
+}
+
+.kpi-label {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 4px
+}
+
+.kpi-value {
+    font-weight: 600
+}
+
+.live {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    justify-self: end;
+    align-self: center;
+    background: var(--warn);
+    box-shadow: 0 0 8px rgba(245, 158, 11, .6)
+}
+
+.live.ok {
+    background: var(--ok);
+    box-shadow: 0 0 8px rgba(22, 163, 74, .6)
+}
+
+.live.err {
+    background: var(--err);
+    box-shadow: 0 0 8px rgba(239, 68, 68, .6)
+}
+
+/* Trends */
+#trend-container {
+    background: var(--card);
+    border: 1px solid #1f2a36;
+    border-radius: var(--rad);
+    padding: 16px;
+    margin-bottom: 20px
+}
+
+#trend-box-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--gap-2)
+}
+
+.trend-box {
+    background: #0d131a;
+    border: 1px solid #1b2633;
+    border-radius: var(--rad);
+    padding: 10px
+}
+
+.tf {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 6px
+}
+
+.chip {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--chip-br);
+    background: var(--chip-bg);
+    font-weight: 600
+}
+
+.chip.bullish {
+    color: #fff;
+    background: rgba(29, 185, 84, .14);
+    border-color: rgba(29, 185, 84, .35)
+}
+
+.chip.bearish {
+    color: #fff;
+    background: rgba(255, 77, 79, .14);
+    border-color: rgba(255, 77, 79, .35)
+}
+
+.chip.neutral {
+    color: #fff;
+    background: rgba(127, 140, 141, .18);
+    border-color: rgba(127, 140, 141, .35)
+}
+
+.ema-line {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #c9d1d9
+}
+
+/* Cards */
+#main-dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-2)
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid #1f2a36;
+    border-radius: var(--rad);
+    padding: 16px
+}
+
+/* Matrix items */
+.matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--gap-2);
+    margin-bottom: 10px
+}
+
+.matrix-item {
+    background: #0d131a;
+    border: 1px solid #1b2633;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center
+}
+
+.param {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 5px
+}
+
+.value {
+    font-weight: 700;
+    border-radius: 6px;
+    padding: 4px 8px;
+    display: inline-block
+}
+
+.value.bullish {
+    color: #fff;
+    background: rgba(29, 185, 84, .2)
+}
+
+.value.bearish {
+    color: #fff;
+    background: rgba(255, 77, 79, .2)
+}
+
+.value.neutral {
+    color: #fff;
+    background: rgba(127, 140, 141, .3)
+}
+
+.value.active {
+    color: #fff;
+    background: rgba(59, 130, 246, .22)
+}
+
+.value.inactive {
+    color: #fff;
+    background: rgba(127, 140, 141, .25)
+}
+
+.value.yes {
+    color: #fff;
+    background: rgba(29, 185, 84, .25)
+}
+
+.value.no {
+    color: #fff;
+    background: rgba(255, 77, 79, .25)
+}
+
+.final-score {
+    text-align: center;
+    font-size: 16px;
+    margin: 8px 0 12px
+}
+
+/* Master Signal */
+.master-signal-box {
+    font-size: 22px;
+    font-weight: 800;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    color: #fff
+}
+
+.master-signal-box.signal-bullish {
+    background: #2cae6a
+}
+
+.master-signal-box.signal-bearish {
+    background: #e65151
+}
+
+.master-signal-box.signal-neutral {
+    background: #7f8c8d
+}
+
+/* Responsive */
+@media (max-width: 1080px) {
+    #main-dashboard-grid {
+        grid-template-columns: 1fr
+    }
+}

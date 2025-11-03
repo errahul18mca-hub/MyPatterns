@@ -1,0 +1,241 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f7f6;
+    color: #333;
+    font-size: 14px;
+}
+
+h1,
+h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+h1 {
+    margin-bottom: 25px;
+    color: #2c3e50;
+}
+
+h3 {
+    color: #34495e;
+    font-size: 1.1em;
+}
+
+p {
+    text-align: center;
+    font-size: 0.9em;
+    color: #555;
+}
+
+#header-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+#header-info p {
+    margin: 5px 15px;
+}
+
+#atr-value.atr-good {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+#atr-value.atr-bad {
+    color: #c0392b;
+    font-weight: bold;
+}
+
+/* --- Trend Container CSS --- */
+#trend-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    margin-bottom: 25px;
+}
+
+#trend-box-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.trend-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 5px;
+    border-radius: 6px;
+    background-color: #ecf0f1;
+    border: 1px solid #dfe6e9;
+}
+
+.trend-box .tf {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 3px;
+}
+
+.trend-box span[id^="trend-"] {
+    font-size: 1em;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.trend-bullish {
+    color: #27ae60;
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.trend-bearish {
+    color: #c0392b;
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.trend-neutral {
+    color: #7f8c8d;
+    background-color: rgba(149, 165, 166, 0.1);
+}
+
+/* ----- NAYA: 2-Column Signal Grid ----- */
+#main-dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2 columns */
+    gap: 20px;
+    align-items: stretch;
+}
+
+@media (max-width: 900px) {
+    #main-dashboard-grid {
+        grid-template-columns: 1fr;
+        /* Stack on smaller screens */
+    }
+}
+
+/* ----- END NAYA ----- */
+
+/* --- Signal Card Styling --- */
+.signal-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.signal-card h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2x2 grid */
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.matrix-item {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+}
+
+.matrix-item .param {
+    display: block;
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+
+.matrix-item .value {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 4px;
+}
+
+.value.bullish {
+    color: #fff;
+    background-color: #27ae60;
+}
+
+.value.bearish {
+    color: #fff;
+    background-color: #c0392b;
+}
+
+.value.neutral {
+    color: #fff;
+    background-color: #7f8c8d;
+}
+
+.value.active {
+    color: #fff;
+    background-color: #2980b9;
+}
+
+.value.inactive {
+    color: #fff;
+    background-color: #95a5a6;
+}
+
+.value.yes {
+    color: #fff;
+    background-color: #27ae60;
+}
+
+.value.no {
+    color: #fff;
+    background-color: #c0392b;
+}
+
+.final-score {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.final-score span {
+    font-weight: bold;
+}
+
+.master-signal-box {
+    font-size: 2em;
+    font-weight: bold;
+    padding: 20px 15px;
+    border-radius: 5px;
+    text-align: center;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.master-signal-box.signal-bullish {
+    background-color: #27ae60;
+}
+
+.master-signal-box.signal-bearish {
+    background-color: #c0392b;
+}
+
+.master-signal-box.signal-neutral {
+    background-color: #7f8c8d;
+}

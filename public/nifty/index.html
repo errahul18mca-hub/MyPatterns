@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIFTY Strategy Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Professional NIFTY Dashboard</h1>
+    <div id="header-info">
+        <p><strong>SPOT:</strong> <span id="spot-ltp">-</span></p>
+        <p><strong>ATM:</strong> <span id="atm">-</span></p>
+        <p><strong>5m ATR:</strong> <span id="atr-value">-</span></p>
+    </div>
+    <div id="signal-matrix-container">
+        <h3>Signal Confirmation Matrix</h3>
+        <div class="matrix-grid">
+            <div class="matrix-item"><span class="param">5min Trend:</span><span id="matrix-trend-5m" class="value neutral">--</span></div>
+            <div class="matrix-item"><span class="param">15min Trend:</span><span id="matrix-trend-15m" class="value neutral">--</span></div>
+            <div class="matrix-item"><span class="param">OI Signal (ATM):</span><span id="matrix-oi-signal" class="value neutral">--</span></div>
+            <div class="matrix-item"><span class="param">Volume Confirmed:</span><span id="matrix-vol-confirm" class="value neutral">--</span></div>
+            <div class="matrix-item"><span class="param">Time Filter:</span><span id="matrix-time-filter" class="value neutral">--</span></div>
+            <div class="matrix-item"><span class="param">ATR Filter:</span><span id="matrix-atr-filter" class="value neutral">--</span></div>
+        </div>
+        <div class="final-score">SCORE: <span id="matrix-score">0</span></div>
+        <div id="master-signal" class="master-signal-box signal-neutral">WAITING...</div>
+    </div>
+    <details>
+        <summary>Show/Hide Option Chain Details</summary>
+        <table id="optionTable">
+            <thead>
+                <tr>
+                    <th colspan="5" class="calls">CALLS</th>
+                    <th class="strike"></th>
+                    <th colspan="5" class="puts">PUTS</th>
+                </tr>
+                <tr>
+                    <th>Signal (5m)</th>
+                    <th>Vol Conf?</th>
+                    <th>OI % (Day)</th>
+                    <th>Price % (Day)</th>
+                    <th>LTP</th>
+                    <th class="strike">STRIKE</th>
+                    <th>LTP</th>
+                    <th>Price % (Day)</th>
+                    <th>OI % (Day)</th>
+                    <th>Vol Conf?</th>
+                    <th>Signal (5m)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </details>
+    <script src="script.js"></script>
+</body>
+</html>
