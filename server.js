@@ -13,7 +13,7 @@ const cryptoTrader = require('./modules/cryptoTrader');
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // --- Static Files ---
 app.use(express.static(path.join(__dirname, 'public')));
