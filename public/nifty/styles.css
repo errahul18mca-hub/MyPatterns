@@ -1,268 +1,239 @@
+/* ====== styles.css ====== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb; /* Light background */
+  color: #111827; /* Neutral text */
+  margin: 0;
+  padding: 0;
+}
+
+
 :root {
-    --bg: #0f1419;
-    --card: #111820;
-    --text: #e6edf3;
-    --muted: #8b949e;
-    --bull: #1db954;
-    --bear: #ff4d4f;
-    --neutral: #7f8c8d;
-    --accent: #3b82f6;
-    --ok: #16a34a;
-    --warn: #f59e0b;
-    --err: #ef4444;
-    --chip-bg: #1b2430;
-    --chip-br: #273142;
-    --kpi-bg: #0b1116;
-    --gap-1: 6px;
-    --gap-2: 12px;
-    --gap-3: 16px;
-    --rad: 10px;
+  --bg: #f6f8fa;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #0366d6;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --glass: rgba(0, 0, 0, 0.04);
+  --chip-bull: #e6ffed;
+  --chip-bear: #fff1f2;
 }
 
 * {
-    box-sizing: border-box
+  box-sizing: border-box
 }
 
-body {
-    margin: 0;
-    padding: 20px;
-    background: var(--bg);
-    color: var(--text);
-    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial
+
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--card);
+  box-shadow: 0 2px 8px var(--glass);
+  border-bottom: 1px solid #eef2f7;
 }
 
-h1,
-h3 {
-    margin: 0 0 var(--gap-2)
+.topbar .brand h1 {
+  margin: 0;
+  font-size: 18px;
+  color: #0b1220
 }
 
-h1 {
-    font-size: 20px
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px
 }
 
-h3 {
-    font-size: 14px;
-    color: #c9d1d9
-}
-
-/* Header KPIs */
-#header-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: var(--gap-2);
-    margin-bottom: 20px
-}
-
-.kpi {
-    background: var(--kpi-bg);
-    border: 1px solid #1f2a36;
-    border-radius: var(--rad);
-    padding: 10px 12px
-}
-
-.kpi-label {
-    display: block;
-    color: var(--muted);
-    font-size: 12px;
-    margin-bottom: 4px
-}
-
-.kpi-value {
-    font-weight: 600
+#symbol-tag {
+  font-weight: 600;
+  color: #0b1220
 }
 
 .live {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    justify-self: end;
-    align-self: center;
-    background: var(--warn);
-    box-shadow: 0 0 8px rgba(245, 158, 11, .6)
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.02)
 }
 
 .live.ok {
-    background: var(--ok);
-    box-shadow: 0 0 8px rgba(22, 163, 74, .6)
+  background: var(--success);
+  box-shadow: 0 0 8px rgba(22, 163, 74, 0.15)
 }
 
-.live.err {
-    background: var(--err);
-    box-shadow: 0 0 8px rgba(239, 68, 68, .6)
+.container {
+  max-width: 1180px;
+  margin: 20px auto;
+  padding: 0 18px
 }
 
-/* Trends */
-#trend-container {
-    background: var(--card);
-    border: 1px solid #1f2a36;
-    border-radius: var(--rad);
-    padding: 16px;
-    margin-bottom: 20px
+.kpi-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px
 }
 
-#trend-box-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: var(--gap-2)
+.kpi {
+  background: var(--card);
+  padding: 12px 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px var(--glass);
+  min-width: 120px;
+  text-align: center
 }
 
-.trend-box {
-    background: #0d131a;
-    border: 1px solid #1b2633;
-    border-radius: var(--rad);
-    padding: 10px
+.kpi small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 4px
 }
 
-.tf {
-    display: block;
-    color: var(--muted);
-    font-size: 12px;
-    margin-bottom: 6px
-}
-
-.chip {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--chip-br);
-    background: var(--chip-bg);
-    font-weight: 600
-}
-
-.chip.bullish {
-    color: #fff;
-    background: rgba(29, 185, 84, .14);
-    border-color: rgba(29, 185, 84, .35)
-}
-
-.chip.bearish {
-    color: #fff;
-    background: rgba(255, 77, 79, .14);
-    border-color: rgba(255, 77, 79, .35)
-}
-
-.chip.neutral {
-    color: #fff;
-    background: rgba(127, 140, 141, .18);
-    border-color: rgba(127, 140, 141, .35)
-}
-
-.ema-line {
-    margin-top: 6px;
-    font-size: 12px;
-    color: #c9d1d9
-}
-
-/* Cards */
-#main-dashboard-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--gap-2)
+.kpi .kpi-value {
+  font-weight: 700;
+  font-size: 16px;
+  color: #0b1220
 }
 
 .card {
-    background: var(--card);
-    border: 1px solid #1f2a36;
-    border-radius: var(--rad);
-    padding: 16px
+  background: var(--card);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(14, 20, 30, 0.04);
+  margin-bottom: 18px
 }
 
-/* Matrix items */
-.matrix-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: var(--gap-2);
-    margin-bottom: 10px
+.trend-grid {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap
 }
 
-.matrix-item {
-    background: #0d131a;
-    border: 1px solid #1b2633;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center
+.trend-box {
+  flex: 1 1 30%;
+  min-width: 200px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #eef2f7
 }
 
-.param {
-    display: block;
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 5px
+.tf {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #0b1220
 }
 
-.value {
-    font-weight: 700;
-    border-radius: 6px;
-    padding: 4px 8px;
-    display: inline-block
+.chip {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px
 }
 
-.value.bullish {
-    color: #fff;
-    background: rgba(29, 185, 84, .2)
+.chip.bullish {
+  background: var(--chip-bull);
+  color: var(--success);
+  border: 1px solid rgba(22, 163, 74, 0.12)
 }
 
-.value.bearish {
-    color: #fff;
-    background: rgba(255, 77, 79, .2)
+.chip.bearish {
+  background: var(--chip-bear);
+  color: var(--danger);
+  border: 1px solid rgba(220, 38, 38, 0.08)
 }
 
-.value.neutral {
-    color: #fff;
-    background: rgba(127, 140, 141, .3)
+.chip.neutral {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #eef2f7
 }
 
-.value.active {
-    color: #fff;
-    background: rgba(59, 130, 246, .22)
+.ema-line {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted)
 }
 
-.value.inactive {
-    color: #fff;
-    background: rgba(127, 140, 141, .25)
+.signals-row {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap
 }
 
-.value.yes {
-    color: #fff;
-    background: rgba(29, 185, 84, .25)
+.signal-box {
+  flex: 1 1 48%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #f0f3f6
 }
 
-.value.no {
-    color: #fff;
-    background: rgba(255, 77, 79, .25)
+.signal-box h3 {
+  margin: 0 0 10px 0;
+  color: #0b1220
 }
 
-.final-score {
-    text-align: center;
-    font-size: 16px;
-    margin: 8px 0 12px
+.signal-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 14px
 }
 
-/* Master Signal */
-.master-signal-box {
-    font-size: 22px;
-    font-weight: 800;
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-    color: #fff
+.master-signal {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 16px;
+  border: 1px solid transparent;
+  background: #f8fafc;
+  color: #0b1220;
+  transition: all .25s ease;
 }
 
-.master-signal-box.signal-bullish {
-    background: #2cae6a
+.master-signal.buy {
+  background: linear-gradient(90deg, #ecfdf5, #def7ec);
+  color: var(--success);
+  border-color: rgba(16, 185, 129, 0.12);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.06)
 }
 
-.master-signal-box.signal-bearish {
-    background: #e65151
+.master-signal.sell {
+  background: linear-gradient(90deg, #fff1f2, #ffe4e6);
+  color: var(--danger);
+  border-color: rgba(220, 38, 38, 0.08);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.06)
 }
 
-.master-signal-box.signal-neutral {
-    background: #7f8c8d
+.master-signal.neutral {
+  background: #fbfdff;
+  color: #334155;
+  border-color: #eef2f7
 }
 
-/* Responsive */
-@media (max-width: 1080px) {
-    #main-dashboard-grid {
-        grid-template-columns: 1fr
-    }
+/* responsive */
+@media (max-width:860px) {
+  .trend-grid {
+    flex-direction: column
+  }
+
+  .signals-row {
+    flex-direction: column
+  }
+
+  .signal-box {
+    flex: 1 1 100%
+  }
 }

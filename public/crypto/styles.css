@@ -1,241 +1,292 @@
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f4f7f6;
-    color: #333;
-    font-size: 14px;
+/* ============================
+   📊 CRYPTO TRADER LIGHT THEME (FULL SCREEN + RESPONSIVE)
+   ============================ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #f6f8fb;
+  --card-bg: #ffffff;
+  --text: #1e1e1e;
+  --subtext: #555;
+  --bull: #2ecc71;
+  --bear: #e74c3c;
+  --neutral: #95a5a6;
+  --border: #e0e0e0;
+  --highlight: #007bff;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-h1,
-h3 {
-    text-align: center;
-    margin-bottom: 15px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1 {
-    margin-bottom: 25px;
-    color: #2c3e50;
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
 }
 
-h3 {
-    color: #34495e;
-    font-size: 1.1em;
+/* MAIN CONTAINER FULL SCREEN */
+.container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-p {
-    text-align: center;
-    font-size: 0.9em;
-    color: #555;
+/* 🔹 HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-bg);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
-#header-info {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    background: #fff;
-    padding: 10px 15px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 25px;
-    font-size: 1.1em;
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #00b37e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-#header-info p {
-    margin: 5px 15px;
+.live-status {
+  font-size: 0.9rem;
+  color: var(--subtext);
 }
 
-#atr-value.atr-good {
-    color: #27ae60;
-    font-weight: bold;
+.live {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  background: var(--neutral);
+}
+.live.ok {
+  background: #2ecc71;
 }
 
-#atr-value.atr-bad {
-    color: #c0392b;
-    font-weight: bold;
+/* 🔹 CRYPTO PANELS */
+.crypto-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  gap: 1.5rem;
+  flex-grow: 1;
 }
 
-/* --- Trend Container CSS --- */
-#trend-container {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    padding: 15px 20px;
-    margin-bottom: 25px;
+.crypto-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-#trend-box-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+/* 🔹 PRICE BOX */
+.price-box {
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
 }
 
-.trend-box {
-    display: flex;
+.symbol {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--highlight);
+}
+
+.atm {
+  text-align: right;
+}
+.atm span#atm {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--highlight);
+}
+.price-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--subtext);
+}
+
+/* 🔹 TREND OVERVIEW */
+.trend-overview h2 {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 0.6rem;
+  color: var(--subtext);
+}
+
+.trend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+}
+
+.trend-card {
+  background: #fafafa;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  text-align: center;
+  padding: 0.8rem;
+}
+
+.trend-title {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.chip {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+}
+.bullish { background: var(--bull); }
+.bearish { background: var(--bear); }
+.neutral { background: var(--neutral); }
+
+.ema-values {
+  font-size: 0.85rem;
+  color: var(--subtext);
+  margin-top: 0.4rem;
+}
+
+/* 🔹 STRATEGY SECTION */
+.strategy-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.strategy-box {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  transition: transform 0.2s ease;
+}
+.strategy-box:hover {
+  transform: translateY(-3px);
+}
+
+.strategy-box h3 {
+  font-size: 1rem;
+  color: var(--highlight);
+  margin-bottom: 0.6rem;
+}
+
+.data {
+  font-size: 0.9rem;
+  color: var(--subtext);
+  line-height: 1.5;
+}
+
+.master-signal {
+  margin-top: 0.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: 10px;
+  color: #fff;
+}
+.master-signal.buy { background: var(--bull); }
+.master-signal.sell { background: var(--bear); }
+.master-signal.neutral { background: var(--neutral); }
+
+/* 🔹 FLASH ANIMATION */
+.flash {
+  animation: flash 0.6s ease-in-out;
+}
+@keyframes flash {
+  0% { background-color: rgba(0,0,0,0.05); }
+  100% { background-color: transparent; }
+}
+
+/* ============================
+   📱 RESPONSIVE STYLING
+   ============================ */
+@media (max-width: 992px) {
+  .crypto-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .price-box {
     flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .atm {
+    text-align: left;
+    margin-top: 0.4rem;
+  }
+
+  .trend-grid {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  }
+
+  .strategy-section {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    gap: 0.6rem;
+    text-align: center;
+  }
+
+  .crypto-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .price-box {
+    text-align: center;
     align-items: center;
-    justify-content: center;
-    padding: 8px 5px;
-    border-radius: 6px;
-    background-color: #ecf0f1;
-    border: 1px solid #dfe6e9;
-}
+  }
 
-.trend-box .tf {
-    font-size: 0.8em;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 3px;
-}
-
-.trend-box span[id^="trend-"] {
-    font-size: 1em;
-    font-weight: bold;
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-
-.trend-bullish {
-    color: #27ae60;
-    background-color: rgba(46, 204, 113, 0.1);
-}
-
-.trend-bearish {
-    color: #c0392b;
-    background-color: rgba(231, 76, 60, 0.1);
-}
-
-.trend-neutral {
-    color: #7f8c8d;
-    background-color: rgba(149, 165, 166, 0.1);
-}
-
-/* ----- NAYA: 2-Column Signal Grid ----- */
-#main-dashboard-grid {
-    display: grid;
+  .trend-grid {
     grid-template-columns: 1fr 1fr;
-    /* 2 columns */
-    gap: 20px;
-    align-items: stretch;
-}
+  }
 
-@media (max-width: 900px) {
-    #main-dashboard-grid {
-        grid-template-columns: 1fr;
-        /* Stack on smaller screens */
-    }
-}
+  .strategy-section {
+    grid-template-columns: 1fr;
+  }
 
-/* ----- END NAYA ----- */
-
-/* --- Signal Card Styling --- */
-.signal-card {
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-.signal-card h3 {
-    margin-top: 0;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    font-size: 1.2em;
-}
-
-.matrix-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* 2x2 grid */
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.matrix-item {
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 5px;
-    padding: 15px;
+  .strategy-box {
     text-align: center;
-}
-
-.matrix-item .param {
-    display: block;
-    font-size: 0.9em;
-    color: #6c757d;
-    margin-bottom: 8px;
-}
-
-.matrix-item .value {
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 3px 10px;
-    border-radius: 4px;
-}
-
-.value.bullish {
-    color: #fff;
-    background-color: #27ae60;
-}
-
-.value.bearish {
-    color: #fff;
-    background-color: #c0392b;
-}
-
-.value.neutral {
-    color: #fff;
-    background-color: #7f8c8d;
-}
-
-.value.active {
-    color: #fff;
-    background-color: #2980b9;
-}
-
-.value.inactive {
-    color: #fff;
-    background-color: #95a5a6;
-}
-
-.value.yes {
-    color: #fff;
-    background-color: #27ae60;
-}
-
-.value.no {
-    color: #fff;
-    background-color: #c0392b;
-}
-
-.final-score {
-    text-align: center;
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-.final-score span {
-    font-weight: bold;
-}
-
-.master-signal-box {
-    font-size: 2em;
-    font-weight: bold;
-    padding: 20px 15px;
-    border-radius: 5px;
-    text-align: center;
-    color: #fff;
-    transition: background-color 0.3s ease;
-}
-
-.master-signal-box.signal-bullish {
-    background-color: #27ae60;
-}
-
-.master-signal-box.signal-bearish {
-    background-color: #c0392b;
-}
-
-.master-signal-box.signal-neutral {
-    background-color: #7f8c8d;
+  }
 }

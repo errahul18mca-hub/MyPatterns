@@ -1,111 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Professional CRYPTO Dashboard</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Trader Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  
 </head>
 <body>
-
-  <h1>Professional CRYPTO Dashboard</h1>
-
-  <div id="header-info">
-    <div class="kpi">
-      <span class="kpi-label">SYMBOL</span>
-      <span id="spot-ltp" class="kpi-value">...</span>
-    </div>
-    <div class="kpi">
-      <span class="kpi-label">PRICE</span>
-      <span id="atm" class="kpi-value">-</span>
-    </div>
-    <div class="kpi">
-      <span class="kpi-label">15m ATR</span>
-      <span id="atr-value" class="kpi-value">-</span>
-    </div>
-    <div class="kpi">
-      <span class="kpi-label">Δ OI (3m)</span>
-      <span id="delta-oi-3m" class="kpi-value">-</span>
-    </div>
-    <div class="kpi">
-      <span class="kpi-label">Δ Price (3m)</span>
-      <span id="delta-price-3m" class="kpi-value">-</span>
-    </div>
-    <div class="kpi">
-      <span class="kpi-label">Δ Vol (3m)</span>
-      <span id="delta-vol-3m" class="kpi-value">-</span>
-    </div>
-    <div class="live" id="live-dot" title="Live status"></div>
-  </div>
-
-  <div id="trend-container">
-    <h3>Multi-Timeframe Trend (EMA 20/50)</h3>
-    <div id="trend-box-grid">
-      <div class="trend-box">
-        <span class="tf">1 Hour</span>
-        <span id="trend-1-hour" class="chip neutral">...</span>
-        <div class="ema-line">EMA20: <span id="ema20-1h">-</span> | EMA50: <span id="ema50-1h">-</span></div>
+  <div class="container">
+    <header class="header">
+      <div class="logo">💹 Crypto Trader</div>
+      <div class="live-status">
+        <span id="live-dot" class="live"></span> LIVE
       </div>
-      <div class="trend-box">
-        <span class="tf">15 Min</span>
-        <span id="trend-15-min" class="chip neutral">...</span>
-        <div class="ema-line">EMA20: <span id="ema20-15m">-</span> | EMA50: <span id="ema50-15m">-</span></div>
-      </div>
-      <div class="trend-box">
-        <span class="tf">5 Min</span>
-        <span id="trend-5-min" class="chip neutral">...</span>
-        <div class="ema-line">EMA20: <span id="ema20-5m">-</span> | EMA50: <span id="ema50-5m">-</span></div>
-      </div>
-    </div>
-  </div>
+    </header>
 
-  <div id="main-dashboard-grid">
-    <div id="intraday-signal-container" class="card">
-      <h3>INTRADAY SIGNAL (1H + 15M Trend + 3m OI)</h3>
-      <div class="matrix-grid">
-        <div class="matrix-item">
-          <span class="param">1hr Trend:</span>
-          <span id="intraday-trend-1h" class="value neutral">--</span>
-        </div>
-        <div class="matrix-item">
-          <span class="param">15min Trend:</span>
-          <span id="intraday-trend-15m" class="value neutral">--</span>
-        </div>
-        <div class="matrix-item">
-          <span class="param">OI Signal (3m):</span>
-          <span id="intraday-oi-signal" class="value neutral">--</span>
-        </div>
-        <div class="matrix-item">
-          <span class="param">ATR Filter:</span>
-          <span id="intraday-atr-filter" class="value neutral">--</span>
-        </div>
-      </div>
-      <div class="final-score">SCORE: <span id="intraday-score">0</span></div>
-      <div id="intraday-master-signal" class="master-signal-box signal-neutral">WAITING...</div>
-    </div>
+    <!-- 🟢 Dual Crypto Panels -->
+    <div class="crypto-panels">
 
-    <div id="scalping-signal-container" class="card">
-      <h3>SCALPING SIGNAL (5M Trend + 3m OI)</h3>
-      <div class="matrix-grid">
-        <div class="matrix-item">
-          <span class="param">5min Trend:</span>
-          <span id="scalp-trend-5m" class="value neutral">--</span>
+      <!-- 🔹 BTC Panel -->
+      <div class="crypto-card">
+        <div class="price-box">
+          <div class="symbol" id="spot-ltp">BTCUSD</div>
+          <div class="atm">
+            <span id="atm">--</span>
+            <span class="price-label">Current Price</span>
+          </div>
         </div>
-        <div class="matrix-item">
-          <span class="param">OI Signal (3m):</span>
-          <span id="scalp-oi-signal" class="value neutral">--</span>
-        </div>
-        <div class="matrix-item">
-          <span class="param">Volume Confirmed:</span>
-          <span id="scalp-vol-confirm" class="value neutral">--</span>
-        </div>
-        <div class="matrix-item">
-          <span class="param">ATR Filter:</span>
-          <span id="scalp-atr-filter" class="value neutral">--</span>
-        </div>
+
+        <section class="trend-overview">
+          <h2>BTC Trend (EMA 20 / 50)</h2>
+          <div class="trend-grid">
+            <div class="trend-card">
+              <div class="trend-title">1 Hour</div>
+              <div id="trend-1-hour" class="chip neutral">NEUTRAL</div>
+              <div class="ema-values">
+                <div>EMA20: <span id="ema20-1h">-</span></div>
+                <div>EMA50: <span id="ema50-1h">-</span></div>
+              </div>
+            </div>
+
+            <div class="trend-card">
+              <div class="trend-title">15 Min</div>
+              <div id="trend-15-min" class="chip neutral">NEUTRAL</div>
+              <div class="ema-values">
+                <div>EMA20: <span id="ema20-15m">-</span></div>
+                <div>EMA50: <span id="ema50-15m">-</span></div>
+              </div>
+            </div>
+
+            <div class="trend-card">
+              <div class="trend-title">5 Min</div>
+              <div id="trend-5-min" class="chip neutral">NEUTRAL</div>
+              <div class="ema-values">
+                <div>EMA20: <span id="ema20-5m">-</span></div>
+                <div>EMA50: <span id="ema50-5m">-</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="strategy-section">
+          <div class="strategy-box main">
+            <h3>📈 Main Strategy (15m)</h3>
+            <div class="data">
+              <div>Trend: <span id="main-trend">-</span></div>
+              <div>RSI: <span id="ui-rsi-15m">-</span></div>
+              <div>ATR: <span id="ui-atr-15m">-</span></div>
+            </div>
+            <div id="ui-main-signal" class="master-signal neutral">WAITING...</div>
+          </div>
+
+          <div class="strategy-box scalp">
+            <h3>⚡ Scalping Strategy (5m)</h3>
+            <div class="data">
+              <div>Trend: <span id="ui-trend-5m">-</span></div>
+              <div>RSI: <span id="ui-rsi-5m">-</span></div>
+              <div>ATR: <span id="ui-atr-5m">-</span></div>
+            </div>
+            <div id="ui-scalp-signal" class="master-signal neutral">WAITING...</div>
+          </div>
+        </section>
       </div>
-      <div class="final-score">SCORE: <span id="scalp-score">0</span></div>
-      <div id="scalp-master-signal" class="master-signal-box signal-neutral">WAITING...</div>
+
+      <!-- 🔹 ETH Panel (Static now, will use same logic later) -->
+      <div class="crypto-card">
+        <div class="price-box">
+          <div class="symbol">ETHUSD</div>
+          <div class="atm">
+            <span id="eth-atm">--</span>
+            <span class="price-label">Current Price</span>
+          </div>
+        </div>
+
+        <section class="trend-overview">
+          <h2>ETH Trend (EMA 20 / 50)</h2>
+          <div class="trend-grid">
+            <div class="trend-card">
+              <div class="trend-title">1 Hour</div>
+              <div class="chip neutral">NEUTRAL</div>
+              <div class="ema-values">
+                <div>EMA20: <span>-</span></div>
+                <div>EMA50: <span>-</span></div>
+              </div>
+            </div>
+            <div class="trend-card">
+              <div class="trend-title">15 Min</div>
+              <div class="chip neutral">NEUTRAL</div>
+              <div class="ema-values">
+                <div>EMA20: <span>-</span></div>
+                <div>EMA50: <span>-</span></div>
+              </div>
+            </div>
+            <div class="trend-card">
+              <div class="trend-title">5 Min</div>
+              <div class="chip neutral">NEUTRAL</div>
+              <div class="ema-values">
+                <div>EMA20: <span>-</span></div>
+                <div>EMA50: <span>-</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="strategy-section">
+          <div class="strategy-box main">
+            <h3>📈 Main Strategy (15m)</h3>
+            <div class="data">
+              <div>Trend: <span>-</span></div>
+              <div>RSI: <span>-</span></div>
+              <div>ATR: <span>-</span></div>
+            </div>
+            <div class="master-signal neutral">WAITING...</div>
+          </div>
+
+          <div class="strategy-box scalp">
+            <h3>⚡ Scalping Strategy (5m)</h3>
+            <div class="data">
+              <div>Trend: <span>-</span></div>
+              <div>RSI: <span>-</span></div>
+              <div>ATR: <span>-</span></div>
+            </div>
+            <div class="master-signal neutral">WAITING...</div>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
 
