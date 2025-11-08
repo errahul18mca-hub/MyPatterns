@@ -14,7 +14,7 @@ const CONFIG = {
   TREND_EMA_LONG: 50,
   ATR_PERIOD: 14,
   RSI_PERIOD: 14,
-  RSI: { upper: 65, lower: 35 },
+  RSI: { upper: 60, lower: 40 },
   TREND_UPDATE_INTERVAL: 15 * 1000,
   DEBUG: false
 };
