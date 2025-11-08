@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Crypto Trader Dashboard</title>
   <link rel="stylesheet" href="styles.css" />
-  
 </head>
 <body>
   <div class="container">
@@ -19,7 +18,7 @@
     <!-- 🟢 Dual Crypto Panels -->
     <div class="crypto-panels">
 
-      <!-- 🔹 BTC Panel -->
+      <!-- 🔹 BTC PANEL -->
       <div class="crypto-card">
         <div class="price-box">
           <div class="symbol" id="spot-ltp">BTCUSD</div>
@@ -40,7 +39,6 @@
                 <div>EMA50: <span id="ema50-1h">-</span></div>
               </div>
             </div>
-
             <div class="trend-card">
               <div class="trend-title">15 Min</div>
               <div id="trend-15-min" class="chip neutral">NEUTRAL</div>
@@ -49,7 +47,6 @@
                 <div>EMA50: <span id="ema50-15m">-</span></div>
               </div>
             </div>
-
             <div class="trend-card">
               <div class="trend-title">5 Min</div>
               <div id="trend-5-min" class="chip neutral">NEUTRAL</div>
@@ -84,10 +81,10 @@
         </section>
       </div>
 
-      <!-- 🔹 ETH Panel (Static now, will use same logic later) -->
+      <!-- 🔹 ETH PANEL -->
       <div class="crypto-card">
         <div class="price-box">
-          <div class="symbol">ETHUSD</div>
+          <div class="symbol" id="eth-spot-ltp">ETHUSD</div>
           <div class="atm">
             <span id="eth-atm">--</span>
             <span class="price-label">Current Price</span>
@@ -99,26 +96,26 @@
           <div class="trend-grid">
             <div class="trend-card">
               <div class="trend-title">1 Hour</div>
-              <div class="chip neutral">NEUTRAL</div>
+              <div id="eth-trend-1-hour" class="chip neutral">NEUTRAL</div>
               <div class="ema-values">
-                <div>EMA20: <span>-</span></div>
-                <div>EMA50: <span>-</span></div>
+                <div>EMA20: <span id="eth-ema20-1h">-</span></div>
+                <div>EMA50: <span id="eth-ema50-1h">-</span></div>
               </div>
             </div>
             <div class="trend-card">
               <div class="trend-title">15 Min</div>
-              <div class="chip neutral">NEUTRAL</div>
+              <div id="eth-trend-15-min" class="chip neutral">NEUTRAL</div>
               <div class="ema-values">
-                <div>EMA20: <span>-</span></div>
-                <div>EMA50: <span>-</span></div>
+                <div>EMA20: <span id="eth-ema20-15m">-</span></div>
+                <div>EMA50: <span id="eth-ema50-15m">-</span></div>
               </div>
             </div>
             <div class="trend-card">
               <div class="trend-title">5 Min</div>
-              <div class="chip neutral">NEUTRAL</div>
+              <div id="eth-trend-5-min" class="chip neutral">NEUTRAL</div>
               <div class="ema-values">
-                <div>EMA20: <span>-</span></div>
-                <div>EMA50: <span>-</span></div>
+                <div>EMA20: <span id="eth-ema20-5m">-</span></div>
+                <div>EMA50: <span id="eth-ema50-5m">-</span></div>
               </div>
             </div>
           </div>
@@ -128,21 +125,21 @@
           <div class="strategy-box main">
             <h3>📈 Main Strategy (15m)</h3>
             <div class="data">
-              <div>Trend: <span>-</span></div>
-              <div>RSI: <span>-</span></div>
-              <div>ATR: <span>-</span></div>
+              <div>Trend: <span id="eth-main-trend">-</span></div>
+              <div>RSI: <span id="eth-ui-rsi-15m">-</span></div>
+              <div>ATR: <span id="eth-ui-atr-15m">-</span></div>
             </div>
-            <div class="master-signal neutral">WAITING...</div>
+            <div id="eth-ui-main-signal" class="master-signal neutral">WAITING...</div>
           </div>
 
           <div class="strategy-box scalp">
             <h3>⚡ Scalping Strategy (5m)</h3>
             <div class="data">
-              <div>Trend: <span>-</span></div>
-              <div>RSI: <span>-</span></div>
-              <div>ATR: <span>-</span></div>
+              <div>Trend: <span id="eth-ui-trend-5m">-</span></div>
+              <div>RSI: <span id="eth-ui-rsi-5m">-</span></div>
+              <div>ATR: <span id="eth-ui-atr-5m">-</span></div>
             </div>
-            <div class="master-signal neutral">WAITING...</div>
+            <div id="eth-ui-scalp-signal" class="master-signal neutral">WAITING...</div>
           </div>
         </section>
       </div>

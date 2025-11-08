@@ -57,7 +57,7 @@ html, body {
 
 .logo {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: #00b37e;
   display: flex;
   align-items: center;
@@ -98,6 +98,11 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.crypto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* 🔹 PRICE BOX */
@@ -115,7 +120,7 @@ html, body {
 }
 
 .symbol {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: var(--highlight);
 }
@@ -123,7 +128,8 @@ html, body {
 .atm {
   text-align: right;
 }
-.atm span#atm {
+.atm span#atm,
+.atm span#eth-atm {
   font-size: 1.4rem;
   font-weight: 600;
   color: var(--highlight);
@@ -194,10 +200,11 @@ html, body {
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   padding: 1rem;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .strategy-box:hover {
   transform: translateY(-3px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
 
 .strategy-box h3 {
@@ -220,6 +227,8 @@ html, body {
   padding: 0.6rem;
   border-radius: 10px;
   color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .master-signal.buy { background: var(--bull); }
 .master-signal.sell { background: var(--bear); }
