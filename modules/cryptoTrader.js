@@ -12,6 +12,7 @@ const CONFIG = {
   SYMBOLS: ["BTCUSD", "ETHUSD"],   // ✅ both assets
   TREND_EMA_SHORT: 20,
   TREND_EMA_LONG: 50,
+  TREND_EMA_SUPERLONG: 200,   // ✅ Add this line
   ATR_PERIOD: 14,
   RSI_PERIOD: 14,
   RSI: { upper: 60, lower: 40 },
@@ -103,61 +104,86 @@ function calculateTrend(symbol, data, label) {
   const closes = data.map(d => d.close);
   const ema20 = latestEMA(closes, CONFIG.TREND_EMA_SHORT);
   const ema50 = latestEMA(closes, CONFIG.TREND_EMA_LONG);
+  const ema200 = latestEMA(closes, CONFIG.TREND_EMA_SUPERLONG);
   const ltp = closes.at(-1);
-  //console.log(
-   // `[TREND DEBUG] ${symbol} | ${label} | LTP: ${ltp?.toFixed(2)} | EMA20: ${ema20?.toFixed(2)} | EMA50: ${ema50?.toFixed(2)}`
-  //);
-  emaCache[symbol] = emaCache[symbol] || {};
-  emaCache[symbol][label] = { ema20, ema50 };
 
+  // store all EMAs in cache
+  emaCache[symbol] = emaCache[symbol] || {};
+  emaCache[symbol][label] = { ema20, ema50, ema200 };
+
+  // debug log (enable CONFIG.DEBUG to see)
+  //if (CONFIG.DEBUG) {
+   // console.log(`[TREND DEBUG] ${symbol} | ${label} | LTP: ${ltp?.toFixed(2)} | EMA20: ${ema20?.toFixed?.(2)} | EMA50: ${ema50?.toFixed?.(2)} | EMA200: ${ema200?.toFixed?.(2)}`);
+  //}
+
+  // emit only numeric values; send null when not available to avoid NaN
   socketIO.emit(`cryptoEmaUpdate_${symbol}`, {
     timeframe: label,
-    ema20: +ema20?.toFixed(2),
-    ema50: +ema50?.toFixed(2)
+    ema20: Number.isFinite(ema20) ? +ema20.toFixed(2) : null,
+    ema50: Number.isFinite(ema50) ? +ema50.toFixed(2) : null,
+    ema200: Number.isFinite(ema200) ? +ema200.toFixed(2) : null
   });
 
-  if (ltp > ema20 && ema20 > ema50) return 'BULLISH';
-  if (ltp < ema20 && ema20 < ema50) return 'BEARISH';
+  if (Number.isFinite(ltp) && Number.isFinite(ema20) && Number.isFinite(ema50)) {
+    if (ltp > ema20 && ema20 > ema50) return 'BULLISH';
+    if (ltp < ema20 && ema20 < ema50) return 'BEARISH';
+  }
   return 'NEUTRAL';
 }
 
+
 function decideMainSignal(symbol, { trend15, rsi15, atr15 }) {
   const lastPrice = latestDataStore[symbol]?.LTP || 1;
+  const ema200 = emaCache[symbol]?.['15 Min']?.ema200 || null;  // ✅ use EMA200 from cache
   const atrPct = isFinite(atr15) && lastPrice > 0 ? (atr15 / lastPrice) * 100 : 0;
   const minAtrPct = 0.03;
-  if (!trend15 || trend15 === 'NEUTRAL') return { signal: 'NO TRADE', reason: 'trend-neutral' };
-  if (atrPct < minAtrPct) return { signal: 'NO TRADE', reason: 'low-vol' };
-  const { upper, lower } = CONFIG.RSI;
-  if (trend15 === 'BEARISH') return (rsi15 >= upper)
-    ? { signal: 'SHORT', reason: `rsi=${rsi15.toFixed(2)}` }
-    : { signal: 'NO TRADE', reason: 'rsi-not-in-zone' };
-  if (trend15 === 'BULLISH') return (rsi15 <= lower)
-    ? { signal: 'LONG', reason: `rsi=${rsi15.toFixed(2)}` }
-    : { signal: 'NO TRADE', reason: 'rsi-not-in-zone' };
-  return { signal: 'NO TRADE', reason: 'fallback' };
+
+  if (!ema200 || !isFinite(rsi15)) return { signal: 'NEUTRAL' };
+  if (atrPct < minAtrPct) return { signal: 'NEUTRAL' };
+
+  // 🔥 CUSTOM STRATEGY (same as scalp but for 15m)
+  if (lastPrice < ema200 && rsi15 > 60 && rsi15 < 65) {
+    return { signal: 'SHORT' };
+  }
+
+  if (lastPrice > ema200 && rsi15 > 22 && rsi15 < 25) {
+    return { signal: 'LONG' };
+  }
+
+  return { signal: 'NEUTRAL' };
 }
+
+
 
 function decideScalpSignal(symbol, { trend5, rsi5, atr5 }) {
   const lastPrice = latestDataStore[symbol]?.LTP || 1;
+  const ema200 = emaCache[symbol]?.['5 Min']?.ema200 || null;
   const atrPct = isFinite(atr5) && lastPrice > 0 ? (atr5 / lastPrice) * 100 : 0;
   const minAtrPct = 0.02;
-  if (!trend5 || trend5 === 'NEUTRAL') return { signal: 'NO TRADE', reason: 'trend-neutral' };
-  if (atrPct < minAtrPct) return { signal: 'NO TRADE', reason: 'low-vol' };
-  const { upper, lower } = CONFIG.RSI;
-  if (trend5 === 'BEARISH') return (rsi5 >= upper)
-    ? { signal: 'SCALP SHORT', reason: `rsi=${rsi5.toFixed(2)}` }
-    : { signal: 'SCALP NO TRADE', reason: 'rsi-not-in-zone' };
-  if (trend5 === 'BULLISH') return (rsi5 <= lower)
-    ? { signal: 'SCALP LONG', reason: `rsi=${rsi5.toFixed(2)}` }
-    : { signal: 'SCALP NO TRADE', reason: 'rsi-not-in-zone' };
-  return { signal: 'NO TRADE', reason: 'fallback' };
+
+  if (!ema200 || !isFinite(rsi5)) return { signal: 'NEUTRAL' };
+  if (atrPct < minAtrPct) return { signal: 'NEUTRAL' };
+
+  // 🔥 CUSTOM STRATEGY:
+  if (lastPrice < ema200 && rsi5 > 60 && rsi5 < 65) {
+    return { signal: 'SHORT' };   // 🔴 Short entry zone
+  }
+
+  if (lastPrice > ema200 && rsi5 > 22 && rsi5 < 25) {
+    return { signal: 'LONG' };    // 🟢 Long entry zone
+  }
+
+  return { signal: 'NEUTRAL' };
 }
+
 
 // --- Main updater ---
 async function updateSymbol(symbol) {
   try {
+    const hoursNeeded = CONFIG.TREND_EMA_SUPERLONG; // e.g. 200
+    const daysForH1 = Math.max(7, Math.ceil(hoursNeeded / 24) + 1); // +1 for safety; min 7
     const [h1, m15, m5] = await Promise.all([
-      getHistorical(symbol, '60min', 7),
+      getHistorical(symbol, '60min', daysForH1),
       getHistorical(symbol, '15min', 3),
       getHistorical(symbol, '5min', 2)
     ]);

@@ -49,6 +49,10 @@ function flashUpdate(el) {
       ema20_1h: prefix + (prefix === '' ? 'ema20-1h' : 'ema20-1h'),
       ema50_1h: prefix + (prefix === '' ? 'ema50-1h' : 'ema50-1h'),
 
+      ema200_1h: prefix + (prefix === '' ? 'ema200-1h' : 'ema200-1h'),
+      ema200_15: prefix + (prefix === '' ? 'ema200-15m' : 'ema200-15m'),
+      ema200_5: prefix + (prefix === '' ? 'ema200-5m' : 'ema200-5m'),
+
       ema20_15: prefix + (prefix === '' ? 'ema20-15m' : 'ema20-15m'),
       ema50_15: prefix + (prefix === '' ? 'ema50-15m' : 'ema50-15m'),
 
@@ -99,21 +103,21 @@ function flashUpdate(el) {
     });
 
     // SOCKET: EMA updates
-    socket.on(`cryptoEmaUpdate_${symbol}`, ({ timeframe, ema20, ema50 } = {}) => {
+    socket.on(`cryptoEmaUpdate_${symbol}`, ({ timeframe, ema20, ema50, ema200 } = {}) => {
       if (!timeframe) return;
       const tf = String(timeframe).toLowerCase();
       if (/1\s*h/i.test(timeframe)) {
         if (el.ema20_1h) safeText(el.ema20_1h, ema20 == null ? '-' : Number(ema20).toFixed(2));
         if (el.ema50_1h) safeText(el.ema50_1h, ema50 == null ? '-' : Number(ema50).toFixed(2));
-        flashUpdate(el.ema20_1h);
+        if (el.ema200_1h) safeText(el.ema200_1h, ema200 == null ? '-' : Number(ema200).toFixed(2));
       } else if (/15/.test(tf)) {
         if (el.ema20_15) safeText(el.ema20_15, ema20 == null ? '-' : Number(ema20).toFixed(2));
         if (el.ema50_15) safeText(el.ema50_15, ema50 == null ? '-' : Number(ema50).toFixed(2));
-        flashUpdate(el.ema20_15);
+        if (el.ema200_15) safeText(el.ema200_15, ema200 == null ? '-' : Number(ema200).toFixed(2));
       } else if (/5/.test(tf)) {
         if (el.ema20_5) safeText(el.ema20_5, ema20 == null ? '-' : Number(ema20).toFixed(2));
         if (el.ema50_5) safeText(el.ema50_5, ema50 == null ? '-' : Number(ema50).toFixed(2));
-        flashUpdate(el.ema20_5);
+        if (el.ema200_5) safeText(el.ema200_5, ema200 == null ? '-' : Number(ema200).toFixed(2));
       }
     });
 
