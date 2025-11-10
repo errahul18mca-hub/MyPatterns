@@ -134,47 +134,53 @@ function calculateTrend(symbol, data, label) {
 
 function decideMainSignal(symbol, { trend15, rsi15, atr15 }) {
   const lastPrice = latestDataStore[symbol]?.LTP || 1;
-  const ema200 = emaCache[symbol]?.['15 Min']?.ema200 || null;  // ✅ use EMA200 from cache
+  const emaData = emaCache[symbol]?.['15 Min'] || {};
+  const { ema20, ema50 } = emaData;
   const atrPct = isFinite(atr15) && lastPrice > 0 ? (atr15 / lastPrice) * 100 : 0;
   const minAtrPct = 0.03;
 
-  if (!ema200 || !isFinite(rsi15)) return { signal: 'NEUTRAL' };
+  if (!ema20 || !ema50 || !isFinite(rsi15)) return { signal: 'NEUTRAL' };
   if (atrPct < minAtrPct) return { signal: 'NEUTRAL' };
 
-  // 🔥 CUSTOM STRATEGY (same as scalp but for 15m)
-  if (lastPrice < ema200 && rsi15 > 60 && rsi15 < 65) {
-    return { signal: 'SHORT' };
+  // 📈 LONG pullback: Uptrend + RSI 30–45
+  if (ema20 > ema50 && rsi15 > 30 && rsi15 < 45) {
+    return { signal: 'LONG', reason: `Uptrend pullback RSI=${rsi15.toFixed(2)}` };
   }
 
-  if (lastPrice > ema200 && rsi15 > 22 && rsi15 < 25) {
-    return { signal: 'LONG' };
+  // 📉 SHORT pullback: Downtrend + RSI 55–70
+  if (ema20 < ema50 && rsi15 > 55 && rsi15 < 70) {
+    return { signal: 'SHORT', reason: `Downtrend pullback RSI=${rsi15.toFixed(2)}` };
   }
 
   return { signal: 'NEUTRAL' };
 }
+
 
 
 
 function decideScalpSignal(symbol, { trend5, rsi5, atr5 }) {
   const lastPrice = latestDataStore[symbol]?.LTP || 1;
-  const ema200 = emaCache[symbol]?.['5 Min']?.ema200 || null;
+  const emaData = emaCache[symbol]?.['5 Min'] || {};
+  const { ema20, ema50 } = emaData;
   const atrPct = isFinite(atr5) && lastPrice > 0 ? (atr5 / lastPrice) * 100 : 0;
   const minAtrPct = 0.02;
 
-  if (!ema200 || !isFinite(rsi5)) return { signal: 'NEUTRAL' };
+  if (!ema20 || !ema50 || !isFinite(rsi5)) return { signal: 'NEUTRAL' };
   if (atrPct < minAtrPct) return { signal: 'NEUTRAL' };
 
-  // 🔥 CUSTOM STRATEGY:
-  if (lastPrice < ema200 && rsi5 > 60 && rsi5 < 65) {
-    return { signal: 'SHORT' };   // 🔴 Short entry zone
+  // 📈 LONG pullback: Uptrend + RSI 30–45
+  if (ema20 > ema50 && rsi5 > 30 && rsi5 < 45) {
+    return { signal: 'LONG', reason: `Uptrend pullback RSI=${rsi5.toFixed(2)}` };
   }
 
-  if (lastPrice > ema200 && rsi5 > 22 && rsi5 < 25) {
-    return { signal: 'LONG' };    // 🟢 Long entry zone
+  // 📉 SHORT pullback: Downtrend + RSI 55–70
+  if (ema20 < ema50 && rsi5 > 55 && rsi5 < 70) {
+    return { signal: 'SHORT', reason: `Downtrend pullback RSI=${rsi5.toFixed(2)}` };
   }
 
   return { signal: 'NEUTRAL' };
 }
+
 
 
 // --- Main updater ---
