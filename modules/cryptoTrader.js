@@ -143,12 +143,12 @@ function decideMainSignal(symbol, { trend15, rsi15, atr15 }) {
   if (atrPct < minAtrPct) return { signal: 'NEUTRAL' };
 
   // 📈 LONG pullback: Uptrend + RSI 30–45
-  if (ema20 > ema50 && rsi15 > 40 && rsi15 < 55) {
+  if (ema20 > ema50 && rsi15 > 48 && rsi15 < 57) {
     return { signal: 'LONG', reason: `Uptrend pullback RSI=${rsi15.toFixed(2)}` };
   }
 
   // 📉 SHORT pullback: Downtrend + RSI 55–70
-  if (ema20 < ema50 && rsi15 > 30 && rsi15 < 45) {
+  if (ema20 < ema50 && rsi15 > 33 && rsi15 < 48) {
     return { signal: 'SHORT', reason: `Downtrend pullback RSI=${rsi15.toFixed(2)}` };
   }
 
@@ -169,12 +169,12 @@ function decideScalpSignal(symbol, { trend5, rsi5, atr5 }) {
   if (atrPct < minAtrPct) return { signal: 'NEUTRAL' };
 
   // 📈 LONG pullback: Uptrend + RSI 30–45
-  if (ema20 > ema50 && rsi5 > 48 && rsi5 < 55) {
+  if (ema20 > ema50 && rsi5 > 48 && rsi5 < 57) {
     return { signal: 'LONG', reason: `Uptrend pullback RSI=${rsi5.toFixed(2)}` };
   }
 
   // 📉 SHORT pullback: Downtrend + RSI 55–70
-  if (ema20 < ema50 && rsi5 > 30 && rsi5 < 45) {
+  if (ema20 < ema50 && rsi5 > 33 && rsi5 < 48) {
     return { signal: 'SHORT', reason: `Downtrend pullback RSI=${rsi5.toFixed(2)}` };
   }
 
